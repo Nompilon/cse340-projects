@@ -58,7 +58,7 @@ header {
 .navigation {
   display: flex;
   gap: 1rem;
-  font-weight: 600;
+  font-weight: 400;
   justify-content: space-around;
   padding: 1rem;
   background-color: var(--heading-background-color);
