@@ -16,12 +16,6 @@
 
 }
 
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-}
-
 .about {
   font-family: Arial, sans-serif;
   text-align: center;
