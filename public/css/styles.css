@@ -15,30 +15,25 @@
   --heading-background-color2: rgb(176, 202, 202);
 
 }
-
-.about {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  padding: 50px;
+body,
+.main-container,
+div {
+  text-align: left;
+  justify-content: flex-start;
+  align-items: flex-start;
+  
 }
 
-.error-box {
-  display: inline-block;
-  padding: 30px;
-  border: 2px solid #ff4d4d;
-  background-color: #ffe6e6;
-  border-radius: 10px;
-  max-width: 600px;
-  margin-left: 25%;
+body {
+  background-color: white;
+  padding: 1rem;
 }
 
-.error-box h2 {
-  color: #ff1a1a;
-  margin-bottom: 20px;
-}
-
-.error-box p {
-  font-size: 1.2em;
+header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  text-decoration: none;
+  align-self: start;
 }
 
 .navigation {
@@ -53,7 +48,6 @@
   color: var(--text);
   transition: 0.5s;
   font-size: 1.5rem;
-
 }
 
 .navigation {
@@ -66,41 +60,11 @@
   color: var(--text);
 }
 
-header {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  text-decoration: none;
-}
-
-.upgrades ul {
-  list-style-type: none;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-
-}
-
-.img-box {
-  background-color: var(--heading-background-color2);
-}
-
-.reviews li {
-  line-height: 1.5;
-  margin: 15px 0;
-}
-
-.reviews ul {
-  list-style-type: disc;
-  list-style-position: inherit;
-  margin: 0;
-  text-align: start;
-}
-
 #top-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 2rem;
+  padding: 0 ;
   height: 60px;
 }
 
@@ -123,6 +87,7 @@ header {
   justify-content: center;
   margin: 2rem auto;
   max-width: 800px;
+ 
 }
 
 .banner .hero-img {
@@ -149,13 +114,49 @@ header {
   font-size: 10px;
   padding: 0;
   margin: 0;
-
 }
 
 .about {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  align-items: start;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 0;
+}
+
+.upgrades ul {
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  padding: 1px;
+  text-align: center;
+}
+
+.img-box {
+  background-color: var(--heading-background-color2);
+  border: 1px solid var(--heading-background-color);
+  width: 150px;
+  height: 100px;
+}
+
+
+.img-box img {
+ padding:15px 40px;
+  
+}
+.reviews li {
+  line-height: 1.5;
+  margin: 15px 0;
+}
+
+.reviews ul {
+  list-style-type:disc;
+  list-style-position: inherit;
+  padding-left: 20px;
+  margin: 0;
+  text-align: start;
 }
 
 .about>.reviews {
@@ -170,16 +171,10 @@ header {
     background-position: center;
     margin: 0;
     font-family: Arial, sans-serif;
-
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-  }
-
-  h1 {
-    font-size: 1.8rem;
-    text-align: center;
   }
 
   body {
@@ -195,7 +190,8 @@ header {
   header span {
     font-weight: 900;
     font-size: 2rem;
-    font-style: italic;
+    text-align: start;
+    padding: 0;
   }
 
   .own-today {
@@ -242,22 +238,21 @@ header {
     flex: 1;
     margin-right: 10px;
   }
-
+  
   .about h3 {
     margin-top: 0;
     margin-bottom: 1rem;
-    text-align: center;
+    text-align: start;
   }
-
-  .upgrades ul,
-  .reviews ul {
+  
+  .upgrades ul{
     margin: 0;
     padding: 0;
     flex: 1;
   }
 
   .upgrades li {
-    padding: .5rem;
+    padding: 0;
   }
 
   .upgrades img {
@@ -270,8 +265,9 @@ header {
   .img-box {
     width: 200px;
     height: 100px;
+    text-align: center;
   }
-
+   
   .navigation {
     font-size: x-large;
   }
