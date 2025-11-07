@@ -24,9 +24,14 @@ div {
   
 }
 
+ h2{
+  font-size: 1.5rem;
+  font-weight: bold;
+ }
+
 body {
   background-color: white;
-  padding: 1rem;
+  padding: 0 1rem;
 }
 
 header {
@@ -71,7 +76,7 @@ header {
 #top-header .siteName a {
   text-decoration: none;
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 2rem;
   color: #000;
 }
 
@@ -123,6 +128,7 @@ header {
   font-family: Arial, sans-serif;
   text-align: center;
   margin: 0;
+  font-size: 1rem;
 }
 
 .upgrades ul {
@@ -132,8 +138,11 @@ header {
   gap: 30px;
   padding: 1px;
   text-align: center;
+  
 }
-
+.upgrades a{
+  color: var(--text1);
+}
 .img-box {
   background-color: var(--heading-background-color2);
   border: 1px solid var(--heading-background-color);
@@ -178,8 +187,8 @@ header {
   }
 
   body {
-    background-color: white;
-    padding: 2rem;
+    /*background-color: white;
+    padding: 0 2rem;*/
     align-items: center;
     border-radius: 12px;
     border: 5px solid var(--heading-background-color2);
@@ -187,13 +196,16 @@ header {
     max-width: 1200px;
   }
 
-  header span {
-    font-weight: 900;
-    font-size: 2rem;
+  #top-header .siteName a{
+    font-weight: bold;
+    font-size: 2.5rem;
     text-align: start;
     padding: 0;
   }
+  h2{
+    font-size: 2rem;
 
+  }
   .own-today {
     width: 201px;
     height: 220px;
@@ -226,9 +238,11 @@ header {
   .about {
     flex-direction: row;
     align-items: stretch;
-    gap: 10rem;
+    gap: 5rem;
   }
-
+ .reviews{
+  font-size: 1.5rem;
+ }
   .about>.reviews,
   .about>.upgrades {
     order: 0;
@@ -243,6 +257,7 @@ header {
     margin-top: 0;
     margin-bottom: 1rem;
     text-align: start;
+    font-size: 1.5rem;
   }
   
   .upgrades ul{
@@ -256,19 +271,22 @@ header {
   }
 
   .upgrades img {
-    max-width: 80px;
+    width: 100px;
     display: block;
     margin: 10px auto 10px auto;
     padding: 1rem 0;
   }
 
   .img-box {
-    width: 200px;
-    height: 100px;
+    width: 300px;
+    height: 150px;
     text-align: center;
   }
    
   .navigation {
     font-size: x-large;
+  }
+  footer{
+    padding-top: 1rem;
   }
 }
