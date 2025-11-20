@@ -90,9 +90,20 @@ Util.buildVehicleDetail = function (vehicle) {
   const mileage = new Intl.NumberFormat("en-US").format(vehicle.inv_miles)
 
   return `
-    <div class="vehicle-detail">
-      <h1>${vehicle.inv_make} ${vehicle.inv_model} (${vehicle.inv_year})</h1>
+  <div class="vehicle-detail-grid">
+    <div class="vehicle-image">
       <img src="${vehicle.inv_image}" alt="Image of ${vehicle.inv_make} ${vehicle.inv_model}" />
+      <div class="vehicle-actions">
+        <a href="#" class="btn primary">Start My Purchase</a>
+        <a href="/contact" class="btn secondary">Contact Us</a>
+        <a href="/schedule-test-drive" class="btn accent">Schedule Test Drive</a>
+        <a href="/refer" class="btn info">Refer a Friend</a>
+      </div>
+    </div>
+
+    <div class="vehicle-info">
+      <h1>${vehicle.inv_make} ${vehicle.inv_model} (${vehicle.inv_year})</h1>
+      <h2> ${mileage} Mileage for just ${price} </h2>
       <p><strong>Price:</strong> ${price}</p>
       <p><strong>Mileage:</strong> ${mileage} miles</p>
       <p><strong>Description:</strong> ${vehicle.inv_description}</p>
@@ -101,7 +112,8 @@ Util.buildVehicleDetail = function (vehicle) {
       <p><strong>Transmission:</strong> ${vehicle.inv_transmission}</p>
       <p><strong>Fuel:</strong> ${vehicle.inv_fuel}</p>
     </div>
-  `
+  </div>
+`
 }
 
 /* ****************************************
