@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Inventory Management</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <header>
+        <%= nav %>
+    </header>
+
+    <main class="inventory-management">
+        <h1>Inventory Management</h1>
+
+        <!-- Flash message -->
+        <% if (message) { %>
+            <div class="flash-message">
+                <p>
+                    <%= message %>
+                </p>
+            </div>
+            <% } %>
+
+                <!-- Links to other views -->
+                <ul>
+                    <li><a href="/inv/add-classification">Add New Classification</a></li>
+                    <li><a href="/inv/add-inventory">Add New Inventory Item</a></li>
+                </ul>
+    </main>
+
+    <footer>
+        <p>&copy; <%= new Date().getFullYear() %> Inventory App</p>
+    </footer>
+</body>
+
+</html>

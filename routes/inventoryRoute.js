@@ -12,4 +12,8 @@ router.get("/type/:classificationId", utilities.handleErrors(invController.build
 router.get("/detail/:inv_id", utilities.handleErrors(invController.buildDetailView)
 )
 
+// Route for inventory management view
+router.get("/", utilities.handleErrors(invController.buildManagement)
+)
+
 module.exports = router;
