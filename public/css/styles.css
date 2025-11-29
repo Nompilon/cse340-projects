@@ -19,8 +19,8 @@ body,
 .main-container,
 div {
   text-align: left;
-  justify-content: flex-start;
-  align-items: flex-start;
+  /*justify-content: flex-start;
+  align-items: flex-start;*/
   
 }
 
@@ -208,7 +208,6 @@ h1 {
   order: -1;
 }
 
-/* Main grid container */
 .vehicle-detail-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -217,7 +216,6 @@ h1 {
   align-items: start;
 }
 
-/* Left column: image */
 .vehicle-image img {
   width: 100%;
   height: auto;
@@ -326,13 +324,201 @@ h1 {
   transition: 0.25s ease;
   text-decoration: none;
 }
-/* Mobile responsiveness */
 @media (max-width: 768px) {
   .vehicle-actions {
     flex-direction: column;
     align-items: stretch;
   }
 }
+
+.login-page {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+.login-page h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.login-page form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-page label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.login-page input[type="email"],
+.login-page input[type="password"] {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.login-page button {
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-page button:hover {
+  background-color: #0056b3;
+}
+
+.login-page p {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.login-page a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.login-page a:hover {
+  text-decoration: underline;
+}
+
+.flash-message {
+  background-color: #ffefef;
+  color: #a94442;
+  padding: 10px;
+  border: 1px solid #a94442;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+main.register-page {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+main.register-page h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+main.register-page .flash-message {
+  background-color: #ffdddd;
+  border-left: 6px solid #f44336;
+  padding: 10px 15px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+main.register-page .flash-message p {
+  margin: 0;
+}
+
+/* Form Styles */
+main.register-page form.register-form {
+  display: flex;
+  flex-direction: column;
+}
+
+main.register-page form.register-form label {
+  margin: 10px 0 5px;
+  font-weight: bold;
+}
+
+main.register-page form.register-form input[type="text"],
+main.register-page form.register-form input[type="email"],
+main.register-page form.register-form input[type="password"] {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+main.register-page form.register-form button {
+  margin-top: 20px;
+  padding: 12px;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+main.register-page form.register-form button:hover {
+  background-color: #0056b3;
+}
+
+main.register-page p {
+  margin-top: 15px;
+  text-align: center;
+}
+
+main.register-page p a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+main.register-page p a:hover {
+  text-decoration: underline;
+}
+
+.login-form input,
+.register-form input {
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 1rem;
+  transition: 0.3s ease;
+  padding-right: 40px;
+  
+}
+
+.login-form input:required:invalid,
+.register-form input:required:invalid {
+  border-color: #e63946;
+  background-color: #ffe5e5;
+  background-image: url("/images/invalid.png");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+
+.login-form input:required:valid,
+.register-form input:required:valid {
+  border-color: #2a9d8f;
+  background-color: #e6fff5;
+  background-image: url("/images/valid.png");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+
+.login-form input:focus,
+.register-form input:focus {
+  outline: none;
+  border-color: #0056b3;
+  box-shadow: 0 0 4px rgba(0, 86, 179, 0.4);
+}
+
 @media only screen and (min-width: 1025px) {
   html {
     background-image: url("/images/site/small_check.jpg");
