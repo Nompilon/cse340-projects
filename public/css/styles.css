@@ -406,7 +406,7 @@ h1 {
   text-align: center;
 }
 
-main.register-page {
+div.register-page {
   max-width: 500px;
   margin: 50px auto;
   padding: 30px;
@@ -417,12 +417,12 @@ main.register-page {
   color: #333;
 }
 
-main.register-page h1 {
+div.register-page h1 {
   text-align: center;
   margin-bottom: 20px;
 }
 
-main.register-page .flash-message {
+div.register-page .flash-message {
   background-color: #ffdddd;
   border-left: 6px solid #f44336;
   padding: 10px 15px;
@@ -430,31 +430,31 @@ main.register-page .flash-message {
   border-radius: 5px;
 }
 
-main.register-page .flash-message p {
+div.register-page .flash-message p {
   margin: 0;
 }
 
 /* Form Styles */
-main.register-page form.register-form {
+div.register-page form.register-form {
   display: flex;
   flex-direction: column;
 }
 
-main.register-page form.register-form label {
+div.register-page form.register-form label {
   margin: 10px 0 5px;
   font-weight: bold;
 }
 
-main.register-page form.register-form input[type="text"],
-main.register-page form.register-form input[type="email"],
-main.register-page form.register-form input[type="password"] {
+div.register-page form.register-form input[type="text"],
+div.register-page form.register-form input[type="email"],
+div.register-page form.register-form input[type="password"] {
   padding: 10px;
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
-main.register-page form.register-form button {
+div.register-page form.register-form button {
   margin-top: 20px;
   padding: 12px;
   font-size: 1rem;
@@ -466,22 +466,22 @@ main.register-page form.register-form button {
   transition: background-color 0.3s ease;
 }
 
-main.register-page form.register-form button:hover {
+div.register-page form.register-form button:hover {
   background-color: #0056b3;
 }
 
-main.register-page p {
+div.register-page p {
   margin-top: 15px;
   text-align: center;
   
 }
 
-main.register-page p a {
+div.register-page p a {
   color:var(--text1);
   text-decoration: none;
 }
 
-main.register-page p a:hover {
+div.register-page p a:hover {
   text-decoration: underline;
 }
 
