@@ -368,7 +368,7 @@ h1 {
 
 .login-page button {
   padding: 12px;
-  background-color: #007bff;
+  background-color: var(--heading-background-color);
   color: white;
   font-size: 16px;
   border: none;
@@ -384,10 +384,11 @@ h1 {
 .login-page p {
   text-align: center;
   margin-top: 15px;
+  color: var(--text1);
 }
 
 .login-page a {
-  color: #007bff;
+  color: var(--text1);
   text-decoration: none;
 }
 
@@ -457,8 +458,8 @@ main.register-page form.register-form button {
   margin-top: 20px;
   padding: 12px;
   font-size: 1rem;
-  background-color: #007bff;
-  color: white;
+  background-color: var(--heading-background-color);
+  color:var(--text);
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -472,10 +473,11 @@ main.register-page form.register-form button:hover {
 main.register-page p {
   margin-top: 15px;
   text-align: center;
+  
 }
 
 main.register-page p a {
-  color: #007bff;
+  color:var(--text1);
   text-decoration: none;
 }
 
@@ -521,7 +523,7 @@ main.register-page p a:hover {
 
 .btn-primary:hover {
   background-color: #0056b3;
-  color: #fff;
+  color: white;
   text-decoration: none;
 }
 
@@ -573,8 +575,8 @@ main.register-page p a:hover {
   width: 100%;
   margin-top: 25px;
   padding: 12px;
-  background-color: #007bff;
-  color: white;
+  background-color: var(--heading-background-color);
+  color: var(--text);
   font-size: 1.1rem;
   font-weight:bold;
   border: none;
