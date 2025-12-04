@@ -97,7 +97,7 @@ header {
   text-decoration: none;
   color: var(--text);
   transition: 0.5s;
-  font-size: 1rem;
+  font-size: .8rem;
 }
 
 #top-header {
@@ -519,6 +519,105 @@ main.register-page p a:hover {
   box-shadow: 0 0 4px rgba(0, 86, 179, 0.4);
 }
 
+.btn-primary:hover {
+  background-color: #0056b3;
+  color: #fff;
+  text-decoration: none;
+}
+
+.navigation ul li a:hover {
+  color: #007bff;
+}
+.form-page {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+.form-page h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.form-page label {
+  display: block;
+  font-weight: bold;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.form-page input[type="text"],
+.form-page input[type="number"],
+.form-page textarea,
+.form-page select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.form-page textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.form-page button[type="submit"] {
+  display: block;
+  width: 100%;
+  margin-top: 25px;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  font-size: 1.1rem;
+  font-weight:bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-page button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* ===== Error Messages ===== */
+.error {
+  color: #d9534f;
+  font-size: 0.9rem;
+  margin-top: 3px;
+  display: block;
+}
+
+.error-list {
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  color: #721c24;
+}
+
+.flash-message {
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  padding: 10px;
+  border-radius: 5px;
+  color: #155724;
+  margin-bottom: 15px;
+}
+
+nav .btn-primary {
+  font-size: 0.8rem;
+  font-weight: 400;
+
+}
 @media only screen and (min-width: 1025px) {
   html {
     background-image: url("/images/site/small_check.jpg");
@@ -634,10 +733,15 @@ main.register-page p a:hover {
     font-size: x-large;
   }
 
-.navigation {
+.navigation{
   gap: 2rem;
-  font-weight: 900;
+  font-weight: 600;
   padding: 2rem;
+}
+
+nav .btn-primary{
+font-weight: 600;
+font-size: 1.5rem;
 }
 
 #top-header #tools a {
