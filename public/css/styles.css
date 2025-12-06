@@ -79,11 +79,11 @@ header {
 
 .navigation ul {
   display: flex;
-  gap: 1rem;
+  gap: .5rem;
   justify-content: space-around;
   list-style: none;
   margin: 0;
-  padding: 1rem;
+  padding: 0;
 }
 
 .navigation li a {
@@ -626,6 +626,10 @@ div.register-page p a:hover {
     min-height: 100vh;
   }
 
+.navigation ul {
+  gap: 1rem;
+  padding: 1rem;
+}
   body {
     /*background-color: white;
     padding: 0 2rem;*/
