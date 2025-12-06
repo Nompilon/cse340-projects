@@ -90,14 +90,14 @@ header {
   text-decoration: none;
   color: var(--text);
 }
-.navigation a {
+nav .btn-primary, .navigation a {
   display: block;
   padding: 0 0 0.5rem 0;
   text-align: left;
   text-decoration: none;
   color: var(--text);
   transition: 0.5s;
-  font-size: .8rem;
+  font-size: .5rem;
 }
 
 #top-header {
@@ -259,8 +259,7 @@ h1 {
   flex-wrap: wrap;
 }
 
-
-.btn {
+/*.btn {
   text-decoration: none;
   padding: 0.9rem 1.5rem;
   border-radius: 6px;
@@ -268,7 +267,7 @@ h1 {
   font-weight: 600;
   display: inline-block;
   transition: 0.25s ease;
-}
+}*/
 
 .btn.primary {
   background-color: #022042;
@@ -310,7 +309,6 @@ h1 {
   gap: 1rem;
   flex-wrap: wrap;
 }
-
 
 .vehicle-actions .btn {
   flex: 1;
@@ -521,14 +519,13 @@ div.register-page p a:hover {
   box-shadow: 0 0 4px rgba(0, 86, 179, 0.4);
 }
 
-.btn-primary:hover {
+.navigation ul li a:hover {
+  /*color: #007bff;*/
   background-color: #0056b3;
   color: white;
   text-decoration: none;
-}
-
-.navigation ul li a:hover {
-  color: #007bff;
+  border-radius: .2rem;
+  padding: .2rem;
 }
 .form-page {
   max-width: 700px;
@@ -615,11 +612,6 @@ div.register-page p a:hover {
   margin-bottom: 15px;
 }
 
-nav .btn-primary {
-  font-size: 0.8rem;
-  font-weight: 400;
-
-}
 @media only screen and (min-width: 1025px) {
   html {
     background-image: url("/images/site/small_check.jpg");
