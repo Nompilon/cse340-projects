@@ -1,6 +1,8 @@
 const invModel = require("../models/inventory-model")
 const utilities = require("../utilities/")
 
+
+
 const invCont = {}
 
 /* ***************************
@@ -79,7 +81,7 @@ invCont.buildAddInventory = async (req, res) => {
 /* ***************************
  * Handle adding new inventory
  * ************************** */
-invCont.addInventory = async (req, res) => {
+invCont.addInventory = async (req, res, next) => {
   try {
     // Prepare data with default images
     const vehicleData = {
@@ -92,15 +94,15 @@ invCont.addInventory = async (req, res) => {
     const result = await invModel.addInventory(vehicleData);
 
     if (result) {
-      req.flash("success", `Vehicle ${vehicleData.inv_make} ${vehicleData.inv_model} added successfully!`);
-      return res.redirect("/inv"); // Redirect to management page
+      req.flash("success", `Vehicle ${vehicleData.inv_make} ${vehicleData.inv_model} added successfully!`)
+      return res.redirect("/inv") // Redirect to management page
     } else {
-      const classifications = await utilities.getClassificationOptions();
-      req.flash("error", "Failed to add vehicle. Please try again.");
+      const classifications = await utilities.getClassificationOptions()
+      req.flash("error", "Failed to add vehicle. Please try again.")
       return res.render("inventory/add-inventory", {
         title: "Add Vehicle",
         nav: await utilities.getNav(),
-        messages: req.flash(),
+        messages: req.flash("error"),
         errors: null,
         classifications,
         vehicle: vehicleData
@@ -142,15 +144,23 @@ invCont.buildDetailView = async function (req, res, next) {
   }
 }
 
-async function buildManagement(req, res) {
-    let nav = await utilities.getNav()
-    const message = req.flash("message")
+/* ***************************
+ *  Build management view
+ * ************************** */
+invCont.buildManagement = async function (req, res) {
+  let nav = await utilities.getNav()
+  const success = req.flash("success")
+  const error = req.flash("error")
+  const notice = req.flash("notice")
 
-    res.render("inventory/management", {
-        title: "Inventory Management",
-        nav,
-        message
-    })
+  res.render("inventory/management", {
+    title: "Inventory Management",
+    nav,
+    success,
+    error,
+    notice
+  })
 }
+
 
 module.exports = invCont

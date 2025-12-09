@@ -1,0 +1,25 @@
+<%- include('../partials/header') %>
+
+    <h1>Account Management</h1>
+
+    <% if (success && success.length) { %>
+        <p class="success">
+            <%= success %>
+        </p>
+        <% } %>
+
+            <% if (error && error.length) { %>
+                <p class="error">
+                    <%= error %>
+                </p>
+                <% } %>
+
+                    <% if (notice && notice.length) { %>
+                        <p class="notice">
+                            <%= notice %>
+                        </p>
+                        <% } %>
+
+                            <p>You're logged in.</p>
+
+                            <%- include('../partials/footer') %>
