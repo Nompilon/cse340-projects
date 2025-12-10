@@ -12,6 +12,7 @@ const classificationRules = () => {
   ]
 }
 
+
 const checkClassificationData = async (req, res, next) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
@@ -27,7 +28,26 @@ const checkClassificationData = async (req, res, next) => {
   next()
 }
 
+// Middleware to check inventory data for errors
+const checkInventoryData = async (req, res, next) => {
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav()
+    const classifications = await utilities.getClassificationOptions()
+    return res.render("inventory/edit-inventory", {
+      title: "Edit Vehicle",
+      nav,
+      errors: errors.array(),
+      messages: req.flash("notice"),
+      classifications,
+      vehicle: req.body
+    })
+  }
+  next()
+}
+
 module.exports = {
   classificationRules,
-  checkClassificationData
+  checkClassificationData,
+  checkInventoryData
 }
