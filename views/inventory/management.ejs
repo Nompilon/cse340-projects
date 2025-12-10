@@ -1,39 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
+<main class="inventory-management">
+    <h1>Inventory Management</h1>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Inventory Management</title>
-    <link rel="stylesheet" href="/css/style.css">
-</head>
+    <!-- Flash messages -->
+    <% if (success.length> 0) { %>
+        <div class="flash-message success">
+            <%= success[0] %>
+        </div>
+        <% } %>
 
-<body>
-    <header>
-        <%= nav %>
-    </header>
+            <% if (error.length> 0) { %>
+                <div class="flash-message error">
+                    <%= error[0] %>
+                </div>
+                <% } %>
 
-    <main class="inventory-management">
-        <h1>Inventory Management</h1>
+                    <% if (notice.length> 0) { %>
+                        <div class="flash-message notice">
+                            <%= notice[0] %>
+                        </div>
+                        <% } %>
 
-        <!-- Flash message -->
-        <% if (message) { %>
-            <div class="flash-message">
-                <p>
-                    <%= message %>
-                </p>
-            </div>
-            <% } %>
+                            <!-- Links to other views -->
+                            <ul>
+                                <li><a href="/inv/add-classification">Add New Classification</a></li>
+                                <li><a href="/inv/add">Add New Inventory Item</a></li>
+                            </ul>
 
-                <!-- Links to other views -->
-                <ul>
-                    <li><a href="/inv/add-classification">Add New Classification</a></li>
-                    <li><a href="/inv/add">Add New Inventory Item</a></li>
-                </ul>
-    </main>
+                            <!-- REQUIRED HEADING -->
+                            <h2>Manage Inventory</h2>
 
-    <footer>
-        <p>&copy; <%= new Date().getFullYear() %> Inventory App</p>
-    </footer>
-</body>
+                            <!-- REQUIRED PARAGRAPH -->
+                            <p>Please select a classification to see the inventory items.</p>
 
-</html>
+                            <!-- REQUIRED SELECT LIST -->
+                            <div class="classification-select">
+                                <%- classificationSelect %>
+                            </div>
+
+                            <!-- REQUIRED EMPTY TABLE -->
+                            <table id="inventoryDisplay"></table>
+
+                            <!-- REQUIRED noscript MESSAGE -->
+                            <noscript>JavaScript must be enabled to use this page.</noscript>
+
+                            <!-- JavaScript file -->
+                            <script src="/js/inventory.js"></script>
+</main>
+
+
+        

@@ -32,4 +32,17 @@ router.post(
   invValidate.checkClassificationData,
   utilities.handleErrors(invController.addClassification)
 )
+
+// Get inventory items for a specific classification (AJAX request)
+router.get(
+  "/getInventory/:classification_id",
+  utilities.handleErrors(invController.getInventoryJSON)
+)
+
+// Build Edit Inventory View
+router.get(
+  "/edit/:inv_id",
+  utilities.handleErrors(invController.editInventoryView)
+)
+
 module.exports = router;
