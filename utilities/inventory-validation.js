@@ -28,6 +28,40 @@ const checkClassificationData = async (req, res, next) => {
   next()
 }
 
+// Inventory validation rules for adding or updating a vehicle
+const inventoryRules = () => {
+  return [
+    body("inv_make")
+      .trim()
+      .isLength({ min: 1 })
+      .withMessage("Vehicle make is required."),
+    body("inv_model")
+      .trim()
+      .isLength({ min: 1 })
+      .withMessage("Vehicle model is required."),
+    body("inv_year")
+      .trim()
+      .isInt({ min: 1886 }) // first car year
+      .withMessage("Year must be a valid number."),
+    body("inv_price")
+      .trim()
+      .isFloat({ min: 0 })
+      .withMessage("Price must be a valid number."),
+    body("inv_miles")
+      .trim()
+      .isFloat({ min: 0 })
+      .withMessage("Miles must be a valid number."),
+    body("inv_color")
+      .trim()
+      .isLength({ min: 1 })
+      .withMessage("Color is required."),
+    body("classification_id")
+      .trim()
+      .isInt({ min: 1 })
+      .withMessage("Classification is required.")
+  ]
+}
+
 // Middleware to check inventory data for errors
 const checkInventoryData = async (req, res, next) => {
   const errors = validationResult(req)
@@ -46,8 +80,35 @@ const checkInventoryData = async (req, res, next) => {
   next()
 }
 
+// ***************************
+// Middleware to check update inventory data
+// Redirects back to the edit view if errors exist
+// ***************************
+const checkUpdateData = async (req, res, next) => {
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav()
+    const classifications = await utilities.getClassificationOptions()
+    const inv_id = req.body.inv_id // include the inventory ID
+
+    return res.render("inventory/edit-inventory", {
+      title: "Edit Vehicle",
+      nav,
+      errors: errors.array(),
+      messages: req.flash("notice"),
+      classifications,
+      vehicle: req.body,
+      inv_id
+    })
+  }
+  next()
+}
+
+
 module.exports = {
   classificationRules,
   checkClassificationData,
-  checkInventoryData
+  inventoryRules,
+  checkInventoryData,
+  checkUpdateData
 }

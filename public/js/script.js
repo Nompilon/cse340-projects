@@ -43,3 +43,13 @@ function validateInventory() {
 
     return isValid;
 }
+
+const bcrypt = require('bcrypt');
+
+async function createHash() {
+  const password = "Password123"; // example password
+  const hash = await bcrypt.hash(password, 10);
+  console.log(hash);
+}
+
+createHash();
