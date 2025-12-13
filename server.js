@@ -19,6 +19,7 @@ const errorRoute = require("./routes/errorRoute")
 const accountRoute = require("./routes/accountRoute")
 const utilities = require("./utilities/")
 const bodyParser = require("body-parser")
+const path = require("path")
 
 /* ***********************
  * Middleware
@@ -57,9 +58,10 @@ app.use(expressLayouts)
 app.set("layout", "./layouts/layout") // not at views root
 
 /* ***********************
- * Routes app.use(express.static("public"))
+ * Routes 
  *************************/
 
+app.use(express.static("public"))
 app.use(static)
 
 /* ***********************

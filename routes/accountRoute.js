@@ -13,6 +13,13 @@ router.get(
 // registration route
 router.get("/register", utilities.handleErrors(accountController.buildRegister))
 
+// Process the registration data
+router.post(
+  "/register",
+  regValidate.registationRules(),
+  regValidate.checkRegData,
+  utilities.handleErrors(accountController.registerAccount))
+
 // Process the login request
 router.post(
   "/login",
@@ -23,10 +30,8 @@ router.post(
 
 // Default account management route
 router.get(
-  "/",
-  utilities.checkLogin,
-  utilities.handleErrors(accountController.buildAccount)
-);
+  "/", utilities.checkLogin,
+  utilities.handleErrors(accountController.buildManagement))
 
 // Export router
 module.exports = router

@@ -4,6 +4,17 @@
     <!-- Flash messages -->
     <!-- (EJS flash message block goes here) -->
 
+    <!-- Registration View Error Display -->
+    <% if (errors) { %>
+        <ul class="notice">
+            <% errors.array().forEach(error=> { %>
+                <li>
+                    <%= error.msg %>
+                </li>
+            <% }) %>
+        </ul>
+        <% } %>
+
     <form action="/account/register" method="post" class="register-form">
 
         <label for="account_firstname">First Name</label>

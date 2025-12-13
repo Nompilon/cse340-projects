@@ -78,7 +78,10 @@ async function accountLogin(req, res) {
   try {
     if (await bcrypt.compare(account_password, accountData.account_password)) {
       delete accountData.account_password
-      const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
+      req.session.accountData = accountData
+      const accessToken = jwt.sign(accountData,
+        process.env.ACCESS_TOKEN_SECRET,
+        { expiresIn: "1h" })
       if(process.env.NODE_ENV === 'development') {
         res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
       } else {
@@ -87,7 +90,7 @@ async function accountLogin(req, res) {
       return res.redirect("/account/")
     }
     else {
-      req.flash("message notice", "Please check your credentials and try again.")
+      req.flash("notice", "Please check your credentials and try again.")
       res.status(400).render("account/login", {
         title: "Login",
         nav,
@@ -102,6 +105,7 @@ async function accountLogin(req, res) {
 
 async function buildAccount(req, res, next) {
   let nav = await utilities.getNav()
+  const accountData = req.session.accountData
   const success = req.flash("success")
   const error = req.flash("error")
   const notice = req.flash("notice")
@@ -112,6 +116,7 @@ async function buildAccount(req, res, next) {
     success,
     error,
     notice,
+    accountData
   })
 }
 module.exports = {
