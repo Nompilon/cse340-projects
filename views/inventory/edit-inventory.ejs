@@ -28,8 +28,7 @@
                     </ul>
                     <% } %>
 
-                        <form action="/inv/update" method="POST" onsubmit="return validateInventory();"
-                            class="vehicle-form">
+                        <form id="updateForm" action="/inv/update" method="POST" onsubmit="return validateInventory();" class="vehicle-form">
                             <input type="hidden" name="inv_id" value="<%= inv_id %>">
 
                             <label for="inv_make">Make</label>
@@ -74,7 +73,7 @@
                             </select>
                             <span id="classification_idError" class="error"></span>
 
-                            <button type="submit">Update Vehicle</button>
+                            <button type="submit" disabled>Update Vehicle</button>C
                             <input type="hidden" name="inv_id" <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
                                 <% } %>>
                         </form>

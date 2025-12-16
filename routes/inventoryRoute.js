@@ -3,6 +3,7 @@ const express = require("express")
 const router = new express.Router() 
 const invController = require("../controllers/invController")
 const invValidate = require("../utilities/inventory-validation")
+const { employeeOnly }  = require("../utilities/account-validation")
 const utilities = require("../utilities/")
 
 // Route to build inventory by classification view
@@ -23,8 +24,6 @@ router.get(
   utilities.handleErrors(invController.buildAddClassification)
 )
 
-router.get("/add", utilities.handleErrors(invController.buildAddInventory))
-
 // Handle POST submission
 router.post(
   "/add-classification",
@@ -39,17 +38,37 @@ router.get(
   utilities.handleErrors(invController.getInventoryJSON)
 )
 
-// Build Edit Inventory View
-router.get(
-  "/edit/:inv_id",
-  utilities.handleErrors(invController.editInventoryView)
-)
-
 /* ***************************
  * Update Inventory Item
  * ************************** */
 router.post(
   "/update/",
   utilities.handleErrors(invController.updateInventory))
+
+// Admin-only routes
+router.get(
+  "/add",
+  employeeOnly, 
+  utilities.handleErrors(invController.buildAddInventory))
+
+router.post(
+  "/add",
+  employeeOnly,
+  utilities.handleErrors(invController.addInventory))
+
+router.get(
+  "/edit/:inv_id",
+  employeeOnly,
+  utilities.handleErrors(invController.buildEditInventory))
+
+router.post(
+  "/update",
+  employeeOnly,
+  utilities.handleErrors(invController.updateInventory))
+
+router.get(
+  "/delete/:inv_id",
+  employeeOnly,
+  utilities.handleErrors(invController.deleteInventory))
 
 module.exports = router;

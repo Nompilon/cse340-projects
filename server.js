@@ -1,112 +1,97 @@
 /* ******************************************
- * This server.js file is the primary file of the 
- * application. It is used to control the project.
+ * Primary server.js file
  *******************************************/
-/* ***********************
- * Require Statements
- *************************/
-const env = require("dotenv").config()
+require("dotenv").config()
 
+const express = require("express")
+const app = express()
+const path = require("path")
 const cookieParser = require("cookie-parser")
 const session = require("express-session")
-const pool = require('./database/')
-const baseController = require("./controllers/baseController")
-const express = require("express")
+const flash = require("connect-flash")
 const expressLayouts = require("express-ejs-layouts")
-const app = express()
+const pool = require('./database/')
+const utilities = require("./utilities/")
+const baseController = require("./controllers/baseController")
 const static = require("./routes/static")
 const inventoryRoute = require("./routes/inventoryRoute")
 const errorRoute = require("./routes/errorRoute")
 const accountRoute = require("./routes/accountRoute")
-const utilities = require("./utilities/")
-const bodyParser = require("body-parser")
-const path = require("path")
 
 /* ***********************
  * Middleware
- * ************************/
+ *************************/
+// Parse JSON and URL-encoded data
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
-app.use(bodyParser.json())
-
-app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
-
+// Cookie parser must come before session
 app.use(cookieParser())
 
+// Session middleware
 app.use(session({
   store: new (require('connect-pg-simple')(session))({
     createTableIfMissing: true,
     pool,
   }),
   secret: process.env.SESSION_SECRET,
-  resave: true,
-  saveUninitialized: true,
+  resave: false, // only save session if modified
+  saveUninitialized: false, // only save when needed
   name: 'sessionId',
-  cookie: { maxAge: 3600000 } // 1 hour
- }))
+  cookie: {
+    maxAge: 3600000, // 1 hour
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production', // only send over HTTPS in production
+    sameSite: 'lax'
+  }
+}))
 
- // Express Messages Middleware
-app.use(require('connect-flash')())
+// Flash messages
+app.use(flash())
 app.use(function(req, res, next){
   res.locals.messages = require('express-messages')(req, res)
   next()
 })
 
+// JWT check (after session and cookie parser)
 app.use(utilities.checkJWTToken)
+
 /* ***********************
- * View Engine and Templates
+ * View Engine
  *************************/
 app.set("view engine", "ejs")
 app.use(expressLayouts)
-app.set("layout", "./layouts/layout") // not at views root
+app.set("layout", "./layouts/layout")
 
 /* ***********************
- * Routes 
+ * Static files
  *************************/
-
 app.use(express.static("public"))
 app.use(static)
 
 /* ***********************
- * Index route
+ * Routes
  *************************/
 app.get("/", utilities.handleErrors(baseController.buildHome))
-
-/* ***********************
- *Inventory routes
- *************************/
 app.use("/inv", inventoryRoute)
-
-/* ***********************
- *Account routes
- *************************/
-app.use("/account", require("./routes/accountRoute"))
-
-/* ***********************
- * Add intentional error route
- *************************/
+app.use("/account", accountRoute)
 app.use("/error", errorRoute)
 
 /* ***********************
- * 404 Handler - Must be last regular route
+ * 404 handler
  *************************/
 app.use(async (req, res, next) => {
-  next({
-    status: 404,
-    message: "Sorry, we appear to have lost that page."
-  })
+  next({ status: 404, message: "Sorry, we appear to have lost that page." })
 })
 
 /* ***********************
-* Express Error Handler
-* Place after all other middleware
-*************************/
+ * Express error handler
+ *************************/
 app.use(async (err, req, res, next) => {
   let nav = await utilities.getNav()
   console.error(`Error at: "${req.originalUrl}": ${err.message}`)
   let message =
-    err.status == 404
-      ? err.message
-      : "Oh no! There was a crash. Maybe try a different route?"
+    err.status === 404 ? err.message : "Oh no! There was a crash. Maybe try a different route?"
 
   res.status(err.status || 500).render("errors/error", {
     title: err.status || "Server Error",
@@ -116,15 +101,10 @@ app.use(async (err, req, res, next) => {
 })
 
 /* ***********************
- * Local Server Information
- * Values from .env (environment) file
+ * Server startup
  *************************/
 const port = process.env.PORT
 const host = process.env.HOST
-
-/* ***********************
- * Log statement to confirm server operation
- *************************/
 app.listen(port, () => {
-  console.log(`app listening on ${host}:${port}`)
+  console.log(`App listening on ${host}:${port}`)
 })

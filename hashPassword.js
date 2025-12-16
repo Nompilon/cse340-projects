@@ -1,9 +1,15 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcryptjs");
 
-async function createHash() {
-  const password = "Password@123"; 
-  const hash = await bcrypt.hash(password, 10);
-  console.log(hash);
+async function hashPassword(plainPassword) {
+  try {
+    const hashedPassword = await bcrypt.hash(plainPassword, 10);
+    console.log("Plain password: ", plainPassword);
+    console.log("Hashed password: ", hashedPassword);
+  } catch (err) {
+    console.error(err);
+  }
 }
 
-createHash();
+// Replace this with your password
+const myPassword = "I@mABas1cCl!3nt";
+hashPassword(myPassword);
