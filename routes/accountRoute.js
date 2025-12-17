@@ -23,11 +23,11 @@ router.get(
 )
 
 // Account management (requires login)
-router.get(
-  "/",
-  utilities.checkLogin,
-  utilities.handleErrors(accountController.buildManagement)
-)
+//router.get(
+ // "/",
+ // utilities.checkLogin,
+ // utilities.handleErrors(accountController.buildManagement)
+//)
 
 // Account update view
 router.get(
@@ -75,7 +75,7 @@ router.post(
 )
 
 router.get(
-  "/account",
+  "/",
   checkJWTToken,
   utilities.handleErrors(accountController.buildAccountJWT))
 

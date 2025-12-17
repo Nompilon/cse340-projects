@@ -1,115 +1,75 @@
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
 const invModel = require("../models/inventory-model")
+
 const Util = {}
 
 /* ************************
  * Constructs the nav HTML unordered list
  ************************** */
 Util.getNav = async function () {
-  let data = await invModel.getClassifications()
-  let list = "<ul>"
+  const data = await invModel.getClassifications()
+  let list = '<ul>'
   list += '<li><a href="/" title="Home page">Home</a></li>'
-  data.rows.forEach((row) => {
-    list += "<li>"
-    list +=
-      '<a href="/inv/type/' +
-      row.classification_id +
-      '" title="See our inventory of ' +
-      row.classification_name +
-      ' vehicles">' +
-      row.classification_name +
-      "</a>"
-    list += "</li>"
-  })
-  list += '<li><a href="/inv/add" class="btn btn-primary" title="Add a new inventory item">Add Inventory</a></li>'
 
-  list += "</ul>"
+  data.rows.forEach((row) => {
+    list += `<li><a href="/inv/type/${row.classification_id}" title="See our inventory of ${row.classification_name} vehicles">${row.classification_name}</a></li>`
+  })
+
+  list += '<li><a href="/inv/add" class="btn btn-primary" title="Add a new inventory item">Add Inventory</a></li>'
+  list += '</ul>'
   return list
 }
 
 /* **************************************
-* Build the classification view HTML
-* ************************************ */
+ * Build the classification view HTML
+ ************************************** */
 Util.buildClassificationGrid = async function (data) {
-  let grid = ""
-
-  if (data.length > 0) {
-    grid = '<ul id="inv-display">'
-    data.forEach((vehicle) => {
-      grid += "<li>"
-      grid +=
-        '<a href="/inv/detail/' +
-        vehicle.inv_id +
-        '" title="View ' +
-        vehicle.inv_make +
-        " " +
-        vehicle.inv_model +
-        ' details"><img src="' +
-        vehicle.inv_thumbnail +
-        '" alt="Image of ' +
-        vehicle.inv_make +
-        " " +
-        vehicle.inv_model +
-        ' on CSE Motors" /></a>'
-      grid += '<div class="namePrice">'
-      grid += "<hr />"
-      grid += "<h2>"
-      grid +=
-        '<a href="/inv/detail/' +
-        vehicle.inv_id +
-        '" title="View ' +
-        vehicle.inv_make +
-        " " +
-        vehicle.inv_model +
-        ' details">' +
-        vehicle.inv_make +
-        " " +
-        vehicle.inv_model +
-        "</a>"
-      grid += "</h2>"
-      grid +=
-        "<span>$" +
-        new Intl.NumberFormat("en-US").format(vehicle.inv_price) +
-        "</span>"
-      grid += "</div>"
-      grid += "</li>"
-    })
-    grid += "</ul>"
-  } else {
-    grid = '<p class="notice">Sorry, no matching vehicles could be found.</p>'
+  if (data.length === 0) {
+    return '<p class="notice">Sorry, no matching vehicles could be found.</p>'
   }
 
+  let grid = '<ul id="inv-display">'
+  data.forEach((vehicle) => {
+    const price = new Intl.NumberFormat("en-US").format(vehicle.inv_price)
+    grid += `
+      <li>
+        <a href="/inv/detail/${vehicle.inv_id}" title="View ${vehicle.inv_make} ${vehicle.inv_model} details">
+          <img src="${vehicle.inv_thumbnail}" alt="Image of ${vehicle.inv_make} ${vehicle.inv_model}" />
+        </a>
+        <div class="namePrice">
+          <hr />
+          <h2>
+            <a href="/inv/detail/${vehicle.inv_id}" title="View ${vehicle.inv_make} ${vehicle.inv_model} details">${vehicle.inv_make} ${vehicle.inv_model}</a>
+          </h2>
+          <span>$${price}</span>
+        </div>
+      </li>
+    `
+  })
+  grid += '</ul>'
   return grid
 }
 
+/* **************************************
+ * Build classification select list
+ ************************************** */
 Util.buildClassificationList = async function (classification_id = null) {
-    let data = await invModel.getClassifications()
-    let classificationList =
-      '<select name="classification_id" id="classificationList" required>'
-    classificationList += "<option value=''>Choose a Classification</option>"
-    data.rows.forEach((row) => {
-      classificationList += '<option value="' + row.classification_id + '"'
-      if (
-        classification_id != null &&
-        row.classification_id == classification_id
-      ) {
-        classificationList += " selected "
-      }
-      classificationList += ">" + row.classification_name + "</option>"
-    })
-    classificationList += "</select>"
-    return classificationList
+  const data = await invModel.getClassifications()
+  let list = '<select name="classification_id" id="classificationList" required>'
+  list += '<option value="">Choose a Classification</option>'
+  data.rows.forEach((row) => {
+    list += `<option value="${row.classification_id}"${classification_id == row.classification_id ? " selected" : ""}>${row.classification_name}</option>`
+  })
+  list += '</select>'
+  return list
 }
-  
+
 /* ******************************************
  * Build HTML for a single vehicle detail
  ****************************************** */
 Util.buildVehicleDetail = function (vehicle) {
-  const price = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-  }).format(vehicle.inv_price)
+  const price = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(vehicle.inv_price)
   const mileage = new Intl.NumberFormat("en-US").format(vehicle.inv_miles)
 
   return `
@@ -123,10 +83,9 @@ Util.buildVehicleDetail = function (vehicle) {
         <a href="/refer" class="btn info">Refer a Friend</a>
       </div>
     </div>
-
     <div class="vehicle-info">
       <h1>${vehicle.inv_make} ${vehicle.inv_model} (${vehicle.inv_year})</h1>
-      <h2> ${mileage} Mileage for just ${price} </h2>
+      <h2>${mileage} Mileage for just ${price}</h2>
       <p><strong>Price:</strong> ${price}</p>
       <p><strong>Mileage:</strong> ${mileage} miles</p>
       <p><strong>Description:</strong> ${vehicle.inv_description}</p>
@@ -136,56 +95,57 @@ Util.buildVehicleDetail = function (vehicle) {
       <p><strong>Fuel:</strong> ${vehicle.inv_fuel}</p>
     </div>
   </div>
-`
+  `
 }
 
+/* ******************************************
+ * Get classification options
+ ****************************************** */
 Util.getClassificationOptions = async function () {
-  const data = await invModel.getClassifications(); // returns rows
+  const data = await invModel.getClassifications()
   let options = '<option value="">Select a classification</option>'
-
   data.rows.forEach((row) => {
     options += `<option value="${row.classification_id}">${row.classification_name}</option>`
   })
-
   return options
 }
 
 /* ****************************************
- * Middleware For Handling Errors
+ * Middleware for handling errors
  **************************************** */
-Util.handleErrors = (fn) => (req, res, next) =>
-  Promise.resolve(fn(req, res, next)).catch(next)
+Util.handleErrors = (fn) => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
 
 /* ****************************************
-* Middleware to check token validity
-**************************************** */
-Util.checkJWTToken = (req, res, next) => {
- if (req.cookies.jwt) {
-    jwt.verify(req.cookies.jwt, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
-      if (err) {
-        res.clearCookie("jwt");
-        return res.redirect("/account/login");
-      }
-      res.locals.accountData = decoded; // account info for views
-      next();
-    });
-  } else {
-    res.redirect("/account/login");
+ * JWT token validation middleware
+ **************************************** */
+Util.checkJWTToken = function (req, res, next) {
+  const token = req.cookies.jwt
+  if (!token) {
+    req.flash("notice", "Please log in first.")
+    return res.redirect("/account/login")
   }
+
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+    if (err) {
+      res.clearCookie("jwt")
+      req.flash("notice", "Session expired. Please log in again.")
+      return res.redirect("/account/login")
+    }
+    res.locals.accountData = decoded
+    next()
+  })
 }
 
 /* ****************************************
- *  Check Login
- * ************************************ */
- Util.checkLogin = (req, res, next) => {
+ * Check login flag middleware
+ **************************************** */
+Util.checkLogin = (req, res, next) => {
   if (res.locals.loggedin) {
-    next()
+    return next()
   } else {
     req.flash("notice", "Please log in.")
     return res.redirect("/account/login")
   }
- }
+}
 
 module.exports = Util
-
-
